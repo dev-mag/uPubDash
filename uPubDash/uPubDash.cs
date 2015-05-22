@@ -1,9 +1,8 @@
 ﻿using Ninject;
+using umbraco.cms.businesslogic;
+using umbraco.cms.businesslogic.web;
 using uPubDash.DependencyInjection;
 using uPubDash.Persistence;
-using Umbraco.Core.Events;
-using Umbraco.Core.Models;
-using Umbraco.Core.Services;
 
 namespace uPubDash
 {
@@ -14,10 +13,9 @@ namespace uPubDash
             TableFactory.CreateTables();
         }
 
-        public static void Enqueue(IContentService sender, SendToPublishEventArgs<IContent> e)
+        public static void Enqueue(Document sender, SendToPublishEventArgs e)
         {
             Ioc.Initialize(NinjectIocContainer.Create(new StandardKernel(new uPubDashModule())));
-            //Ioc.Get<>()
         }
     }
 }
