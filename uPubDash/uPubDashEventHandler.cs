@@ -1,5 +1,4 @@
-﻿using System;
-using umbraco.cms.businesslogic;
+﻿using umbraco.cms.businesslogic;
 using umbraco.cms.businesslogic.web;
 using Umbraco.Core;
 
@@ -17,7 +16,7 @@ namespace uPubDash
 
         private void DocumentOnAfterSendToPublish(Document sender, SendToPublishEventArgs sendToPublishEventArgs)
         {
-            uPubDash.Enqueue(sender, sendToPublishEventArgs);
+            uPubDash.Enqueue(sender);
         }
     }
 }

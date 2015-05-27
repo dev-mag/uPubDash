@@ -7,10 +7,10 @@ namespace uPubDash.Persistence
     [TableName("uPubDash")]
     [PrimaryKey("Id")]
     [ExplicitColumns]
-    public class PublicationRequestQueue
+    public class PublicationRequest
     {
         [Column("Id")]
-        [PrimaryKeyColumn(Name = "PK_PublicationRequestQueue", AutoIncrement = true, Clustered = true)]
+        [PrimaryKeyColumn(Name = "PK_PublicationRequest", AutoIncrement = true, Clustered = true)]
         public int Id { get; set; }
 
         [Column("NodeId")]

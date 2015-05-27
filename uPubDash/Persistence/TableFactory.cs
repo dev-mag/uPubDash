@@ -32,7 +32,7 @@ namespace uPubDash.Persistence
 
                 using (var transaction = database.GetTransaction())
                 {
-                    database.CreateTable<PublicationRequestQueue>();
+                    database.CreateTable<PublicationRequest>();
                     transaction.Complete();
                     Log.Info("Created PublicationRequestQueue table.");
                 }

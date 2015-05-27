@@ -1,4 +1,5 @@
 ﻿using Ninject.Modules;
+using uPubDash.Persistence;
 
 namespace uPubDash.DependencyInjection
 {
@@ -6,6 +7,8 @@ namespace uPubDash.DependencyInjection
     {
         public override void Load()
         {
+            Bind<IPublicationRequestRepository>().To<PublicationRequestRepository>();
+            Bind<IPublicationRequestService>().To<PublicationRequestService>();
         }
     }
 }
