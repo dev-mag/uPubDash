@@ -6,6 +6,7 @@ using umbraco.cms.businesslogic.web;
 using uPubDash.DependencyInjection;
 using uPubDash.Models;
 using uPubDash.Persistence;
+using uPubDash.Services;
 
 namespace uPubDash
 {
