@@ -95,7 +95,7 @@ namespace uPubDash.Tests.Unit
         }
 
         [Test]
-        public void GetIsCalled_GivenValidResponceFromRepository_ListReturnedAsExpected()
+        public void GetRequestsIsCalled_GivenValidResponceFromRepository_ListReturnedAsExpected()
         {
             //Given
             const int testPubReq1Id = 1;

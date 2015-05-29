@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using log4net;
 using Ninject;
 using umbraco.BusinessLogic;
@@ -41,5 +42,10 @@ namespace uPubDash
             }
             
         }
+
+        public static List<PublicationRequestDto> GetPublicationRequests()
+        {
+            return Ioc.Get<IPublicationRequestService>().GetRequests();
+        } 
     }
 }
