@@ -5,7 +5,9 @@ namespace uPubDash.Services
 {
     public interface IPublicationRequestService
     {
-        int Add(AddPublicationRequestDto addPublicationRequestDto);
         List<PublicationRequestDto> GetRequests();
+        PublicationRequestDto GetRequest(int publicationRequestId);
+        int Submit(SubmitPublicationRequestDto submitPublicationRequestDto);
+        void RemoveForDocument(int nodeId);
     }
 }

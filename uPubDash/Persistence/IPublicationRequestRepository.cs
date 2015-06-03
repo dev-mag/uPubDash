@@ -7,7 +7,7 @@ namespace uPubDash.Persistence
         int Create(PublicationRequest publicationRequest);
         List<PublicationRequest> Read();
         PublicationRequest Read(int publicationRequestId);
-        void Update(PublicationRequest publicationRequest);
+        int Update(PublicationRequest publicationRequest);
         void Delete(int publicationRequestId);
     }
 }

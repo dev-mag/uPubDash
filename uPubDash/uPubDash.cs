@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using log4net;
+﻿using log4net;
 using Ninject;
+using System;
+using System.Collections.Generic;
 using umbraco.BusinessLogic;
 using umbraco.cms.businesslogic.web;
 using uPubDash.DependencyInjection;
@@ -25,27 +25,41 @@ namespace uPubDash
         {
             try
             {
-                var addPublicationRequest = new AddPublicationRequestDto();
-
-                addPublicationRequest.UserId = User.GetCurrent().Id;
-                addPublicationRequest.NodeId = document.Id;
-                addPublicationRequest.VersionId = document.Version;
-
                 var publicationRequestService = Ioc.Get<IPublicationRequestService>();
 
-                publicationRequestService.Add(addPublicationRequest);
+                var submitPublicationRequestDto = new SubmitPublicationRequestDto();
+
+                submitPublicationRequestDto.UserId = User.GetCurrent().Id;
+                submitPublicationRequestDto.NodeId = document.Id;
+                submitPublicationRequestDto.VersionId = document.Version;
+
+                publicationRequestService.Submit(submitPublicationRequestDto);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Log.Error(ex.Message, ex);
                 throw;
             }
-            
         }
 
         public static List<PublicationRequestDto> GetPublicationRequests()
         {
             return Ioc.Get<IPublicationRequestService>().GetRequests();
-        } 
+        }
+
+        public static void Dequeue(Document document)
+        {
+            try
+            {
+                var publicationRequestService = Ioc.Get<IPublicationRequestService>();
+
+                publicationRequestService.RemoveForDocument(document.Id);
+            }
+            catch(Exception ex)
+            {
+                Log.Error(ex.Message, ex);
+                throw;
+            }
+        }
     }
 }

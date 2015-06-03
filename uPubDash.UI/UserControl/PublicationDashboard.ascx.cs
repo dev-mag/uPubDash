@@ -17,8 +17,8 @@ namespace uPubDash.UI.UserControl
                 Data = uPubDash.GetPublicationRequests();
             }
 
-            Repeater1.DataSource = Data;
-            Repeater1.DataBind();
+            rptPublicationRequests.DataSource = Data;
+            rptPublicationRequests.DataBind();
         }
     }
 }

@@ -238,7 +238,7 @@
     <Compile Include="DependencyInjection\uPubDashModule.cs" />
     <Compile Include="Models\PublicationRequestDto.cs" />
     <Compile Include="Services\IPublicationRequestService.cs" />
-    <Compile Include="Models\AddPublicationRequestDto.cs" />
+    <Compile Include="Models\SubmitPublicationRequestDto.cs" />
     <Compile Include="Persistence\IPublicationRequestRepository.cs" />
     <Compile Include="Persistence\PublicationRequest.cs" />
     <Compile Include="Persistence\PublicationRequestRepository.cs" />

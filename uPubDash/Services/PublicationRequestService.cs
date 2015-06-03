@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Umbraco.Core.Services;
 using uPubDash.Models;
 using uPubDash.Persistence;
-using Umbraco.Core.Services;
 
 namespace uPubDash.Services
 {
@@ -19,21 +20,41 @@ namespace uPubDash.Services
             PublicationRequestRepository = publicationRequestRepository;
         }
 
-        public int Add(AddPublicationRequestDto addPublicationRequestDto)
+        public int Submit(SubmitPublicationRequestDto submitPublicationRequestDto)
         {
-            if (addPublicationRequestDto == null)
-                throw new ArgumentNullException("addPublicationRequestDto");
+            if(submitPublicationRequestDto == null)
+                throw new ArgumentNullException("submitPublicationRequestDto");
 
-            var newPublicationRequest = new PublicationRequest();
+            var publicationRequest = FindByNodeId(submitPublicationRequestDto.NodeId);
 
-            newPublicationRequest.DateTimeQueued = DateTime.Now;
-            newPublicationRequest.NodeId = addPublicationRequestDto.NodeId;
-            newPublicationRequest.SubmitterUserId = addPublicationRequestDto.UserId;
-            newPublicationRequest.VersionId = addPublicationRequestDto.VersionId.ToString();
+            if(publicationRequest == null)
+            {
+                publicationRequest = new PublicationRequest
+                {
+                    NodeId = submitPublicationRequestDto.NodeId, 
+                    DateTimeQueued = DateTime.Now, 
+                    SubmitterUserId = submitPublicationRequestDto.UserId, 
+                    VersionId = submitPublicationRequestDto.VersionId.ToString()
+                };
 
-            var newPublicationRequestId = PublicationRequestRepository.Create(newPublicationRequest);
+                return PublicationRequestRepository.Create(publicationRequest);
+            }
 
-            return newPublicationRequestId;
+            publicationRequest.DateTimeQueued = DateTime.Now;
+            publicationRequest.VersionId = submitPublicationRequestDto.VersionId.ToString();
+            publicationRequest.SubmitterUserId = submitPublicationRequestDto.UserId;
+
+            return PublicationRequestRepository.Update(publicationRequest);
+        }
+
+        public void RemoveForDocument(int nodeId)
+        {
+            var publicationRequest = FindByNodeId(nodeId);
+
+            if (publicationRequest != null)
+            {
+                PublicationRequestRepository.Delete(publicationRequest.Id);
+            }
         }
 
         public List<PublicationRequestDto> GetRequests()
@@ -42,20 +63,44 @@ namespace uPubDash.Services
 
             var publicationRequestDtos = new List<PublicationRequestDto>();
 
-            foreach (var publicationRequest in list)
+            foreach(var publicationRequest in list)
             {
-                var publicationRequestDto = new PublicationRequestDto();
-
-                publicationRequestDto.Id = publicationRequest.Id;
-                publicationRequestDto.SubmittedBy = UserService.GetUserById(publicationRequest.SubmitterUserId).Name;
-                publicationRequestDto.Name = ContentService.GetById(publicationRequest.NodeId).Name;
-                publicationRequestDto.VersionId = new Guid(publicationRequest.VersionId);
-                publicationRequestDto.DateSubmitted = publicationRequest.DateTimeQueued;
+                var publicationRequestDto = new PublicationRequestDto
+                {
+                    Id = publicationRequest.Id, 
+                    SubmittedBy = UserService.GetUserById(publicationRequest.SubmitterUserId).Name, 
+                    NodeId = publicationRequest.NodeId, 
+                    Name = ContentService.GetById(publicationRequest.NodeId).Name, 
+                    VersionId = new Guid(publicationRequest.VersionId), 
+                    DateSubmitted = publicationRequest.DateTimeQueued
+                };
 
                 publicationRequestDtos.Add(publicationRequestDto);
             }
 
             return publicationRequestDtos;
+        }
+
+        public PublicationRequestDto GetRequest(int publicationRequestId)
+        {
+            var request = PublicationRequestRepository.Read(publicationRequestId);
+
+            var publicationRequestDto = new PublicationRequestDto()
+            {
+                Id = request.Id,
+                SubmittedBy = UserService.GetUserById(request.SubmitterUserId).Name,
+                Name = ContentService.GetById(request.NodeId).Name,
+                VersionId = new Guid(request.VersionId),
+                DateSubmitted = request.DateTimeQueued
+            };
+
+            return publicationRequestDto;
+        }
+
+        private PublicationRequest FindByNodeId(int nodeId)
+        {
+            var list = PublicationRequestRepository.Read();
+            return list.FirstOrDefault(request => request.NodeId == nodeId);
         }
     }
 }
