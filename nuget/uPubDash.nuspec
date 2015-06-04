@@ -14,5 +14,5 @@
   <files>
 	<file src="..\uPubDash\bin\Release\uPubDash.dll" target="lib\uPubDash.dll" />
 	<file src="..\uPubDash.UI\bin\Release\uPubDash.dll" target="lib\uPubDash.UI.dll" />
-  </file>
+  </files>
 </package>
