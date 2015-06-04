@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>uPubDash.UI</id>
+    <version>0.0</version>
+    <authors>dev-mag</authors>
+    <description>Package description</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <dependencies>
+      <dependency id="uPubDash" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="..\uPubDash.UI\bin\Release\uPubDash.UI.dll" target="lib\uPubDash.UI" />
+  </files>
+</package>
