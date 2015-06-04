@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>uPubDash</id>
+    <version>0.0</version>
+    <authors>dev-mag</authors>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Publication dashboard for umbraco</description>
+    <dependencies>
+      <dependency id="UmbracoCms.Core" version="6.2.5" />
+	  <dependency id="Ninject" version="3.2.2.0" />
+    </dependencies>
+  </metadata>
+  <files>
+	<file src="..\uPubDash\bin\Release\uPubDash.dll" target="lib\uPubDash.dll" />
+	<file src="..\uPubDash.UI\bin\Release\uPubDash.dll" target="lib\uPubDash.UI.dll" />
+  </file>
+</package>
