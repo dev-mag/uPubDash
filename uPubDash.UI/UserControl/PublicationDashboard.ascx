@@ -1,16 +1,12 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PublicationDashboard.ascx.cs" Inherits="uPubDash.UI.UserControl.PublicationDashboard" %>
-<%@ Import Namespace="uPubDash.UI" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PublicationDashboard.ascx.cs"  Inherits="uPubDash.UI.UserControl.PublicationDashboard" %>
 
-<link href="<%= Page.ClientScript.GetWebResourceUrl(typeof(uPubDashResources), "uPubDash.UI.Content.bootstrap.min.css") %>" rel="stylesheet" />
-
-<script type="text/javascript" src="<%= Page.ClientScript.GetWebResourceUrl(typeof(uPubDashResources), "uPubDash.UI.Scripts.jquery-1.9.1.min.js") %>"></script>
-<script type="text/javascript" src="<%= Page.ClientScript.GetWebResourceUrl(typeof(uPubDashResources), "uPubDash.UI.Scripts.bootstrap.min.js") %>"></script>
+<link href="upubdash/usercontrol/css/publication-dashboard.css" rel="stylesheet" />
 
 <h1>Publication Queue</h1>
 
 <asp:Repeater ID="rptPublicationRequests" runat="server">
     <HeaderTemplate>
-        <table class="table table-striped">
+        <table class="publication-table publication-table-striped publication-table-bordered publication-table-hover">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -25,7 +21,7 @@
         <tr>
             <td><asp:Label runat="server" ID="lblId" Text='<%# Eval("Id") %>' /></td>
             <td>
-                <asp:HyperLink runat="server" ID="hlnkContent" NavigateUrl='<%# string.Format("/editContent.aspx?id={0}", Eval("Id")) %>' Text='<%# Eval("Name") %>'></asp:HyperLink>
+                <asp:HyperLink runat="server" ID="hlnkContent" NavigateUrl='<%# string.Format("/umbraco/editContent.aspx?id={0}", Eval("NodeId")) %>' Text='<%# Eval("Name") %>'></asp:HyperLink>
             </td>
             <td><asp:Label runat="server" ID="lblSubmittedBy" Text='<%# Eval("SubmittedBy") %>' /></td>
             <td><asp:Label runat="server" ID="lblVersionId" Text='<%# Eval("VersionId") %>' /></td>
