@@ -11,9 +11,9 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>SubmittedBy</th>
-                    <th>VersionId</th>
-                    <th>DateSubmitted</th>
+                    <th>Submitted By</th>
+                    <th>Version Id</th>
+                    <th>Date Submitted</th>
                 </tr>
             </thead>
     </HeaderTemplate>
