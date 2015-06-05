@@ -1,11 +1,11 @@
 ###Nuget Packages
-####uFluent
+####uPubDash
 
 [![NuGet version](https://badge.fury.io/nu/uPubDash.svg)](http://badge.fury.io/nu/uPubDash)
 
 Url : **http://www.nuget.org/packages/uPubDash/**
 
-Cmd : ```PM> Install-Package uFluent```
+Cmd : ```PM> Install-Package uPubDash```
 
 ##README
 
